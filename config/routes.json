@@ -1,0 +1,52 @@
+{
+  "info": {
+    "title": "My API, powered by Zuplo",
+    "description": "You can document your API directly in this file. Learn more: https://docs.zuplo.com/articles/developer-portal",
+    "version": "0.0.1"
+  },
+  "routes": [
+    {
+      "label": "Welcome",
+      "path": "/",
+      "methods": ["GET"],
+      "handler": {
+        "module": "$import(@zuplo/runtime)",
+        "export": "urlRewriteHandler",
+        "options": {
+          "rewritePattern": "https://welcome.zuplo.io"
+        }
+      },
+      "corsPolicy": "anything-goes",
+      "version": "none",
+      "summary": "Proxy Welcome API",
+      "description": "This Route will proxy the welcome.zuplo.io api"
+    },
+    {
+      "label": "What zup?",
+      "path": "/hello-world",
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/hello-world)"
+      },
+      "methods": ["GET", "POST"],
+      "corsPolicy": "anything-goes",
+      "version": "v1",
+      "policies": {
+        "inbound": []
+      },
+      "summary": "Triggers hello world",
+      "description": "This Route will invoke the default export in hello-world"
+    }
+  ],
+  "versions": [
+    {
+      "name": "none",
+      "pathPrefix": ""
+    },
+    {
+      "name": "v1",
+      "pathPrefix": "/v1"
+    }
+  ],
+  "policies": []
+}
